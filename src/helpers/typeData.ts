@@ -1,14 +1,14 @@
 export type MovieDataType = {
     _id: string;
     title: string;
-    description: string;
-    idActor: string[];
-    idCategory: string[];
-    year: number;
-    rating: number;
+    imdb: string;
+    duration: string;
+    slug: string;
     image: string;
-    backgroundImage: string;
-
+    image_thumb: string;
+    release_date: string;
+    actors: ActorDataType[];
+    categories: string[];
 }
 
 

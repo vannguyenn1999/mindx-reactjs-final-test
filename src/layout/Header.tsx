@@ -29,6 +29,8 @@ const HeaderCompoment = () => {
     navigate(`/tim-kiem/${searchValue}`);
   };
 
+  console.log(DATA_MOVIE);
+
   return (
     <>
       <Navbar fluid>
@@ -54,30 +56,60 @@ const HeaderCompoment = () => {
                     type="text"
                     icon={HiOutlineSearch}
                     placeholder="Tìm kiếm phim , diễn viên"
-                    className="sm:w-30 md:w-40 lg:w-60 xl:w-85"
+                    className="sm:w-35 md:w-40 lg:w-60 xl:w-85"
                     autoComplete="off"
                   />
                   {debouncedSearchTerm &&
                     // eslint-disable-next-line react-hooks/refs
                     document.activeElement === inputRef?.current && (
-                      <div className="absolute top-full sm:w-30 md:w-40 lg:w-60 xl:w-85 mt-1 bg-gray-700 text-white rounded shadow-lg z-20">
+                      <div className="absolute top-full sm:w-35 md:w-60 lg:w-60 xl:w-85 mt-1 bg-gray-700 text-white rounded shadow-lg z-20">
                         <span className="py-2! px-4 text-sm md:text-[13px] lg:text-[14px]">
                           Danh sách phim
                         </span>
                         <div className="flex flex-col justify-start items-start p-2">
                           {DATA_MOVIE.filter((it) =>
-                            it.title.includes(debouncedSearchTerm),
+                            it.title
+                              .toLowerCase()
+                              .includes(debouncedSearchTerm),
                           ).length > 0 ? (
                             DATA_MOVIE.filter((it) =>
-                              it.title.includes(debouncedSearchTerm),
-                            ).map((item) => (
-                              <div
-                                className="p-3 rounded-xl hover:text-amber-300 hover:bg-gray-500 text-center text-sm"
-                                key={item._id}
-                              >
-                                {item.title}
-                              </div>
-                            ))
+                              it.title
+                                .toLowerCase()
+                                .includes(debouncedSearchTerm),
+                            )
+                              .slice(0, 5)
+                              .map((item) => (
+                                <Link
+                                  to={`/phim/${item.slug}`}
+                                  className="p-1 md:p-2 rounded-xl hover:text-amber-300 hover:bg-gray-500 text-sm w-full cursor-pointer flex items-center justify-start"
+                                  key={item._id}
+                                >
+                                  <img
+                                    src={`/movies/thumbs/${item?.image}`}
+                                    alt={item?.title}
+                                    className="object-cover h-10 w-10 md:h-15 md:w-15 xl:h-20 xl:w-20 rounded-lg me-3 bleck md:block"
+                                  />
+                                  <div className="flex flex-col">
+                                    <span className="text-[11px] md:text-[12px] lg:text-[14px]">
+                                      {item.title}
+                                    </span>
+
+                                    <div className="flex justify-between mt-1 md:mt-3 items-center">
+                                      <span className="text-gray-400 text-xs">
+                                        {item.imdb}
+                                      </span>
+                                      &#8226;
+                                      <span className="text-gray-400 text-xs">
+                                        {item.release_date.split("-")[2]}
+                                      </span>
+                                      &#8226;
+                                      <span className="text-gray-400 text-xs">
+                                        {item.duration}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </Link>
+                              ))
                           ) : (
                             <div className="p-3 text-[11px] lg:text-[14px]">
                               Không tìm thấy kết quả nào !
