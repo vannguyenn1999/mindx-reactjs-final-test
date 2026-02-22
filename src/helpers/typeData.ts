@@ -9,6 +9,7 @@ export type MovieDataType = {
     release_date: string;
     actors: ActorDataType[];
     categories: string[];
+    country?: string;
 }
 
 

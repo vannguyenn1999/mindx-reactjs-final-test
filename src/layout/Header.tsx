@@ -62,7 +62,7 @@ const HeaderCompoment = () => {
                   {debouncedSearchTerm &&
                     // eslint-disable-next-line react-hooks/refs
                     document.activeElement === inputRef?.current && (
-                      <div className="absolute top-full sm:w-35 md:w-60 lg:w-60 xl:w-85 mt-1 bg-gray-700 text-white rounded shadow-lg z-20">
+                      <div className="absolute top-full sm:w-35 md:w-60 lg:w-60 xl:w-85 mt-1 bg-gray-700 text-white rounded shadow-lg z-20 max-h-50 md:max-h-90 lg:max-h-160 overflow-y-auto ">
                         <span className="py-2! px-4 text-sm md:text-[13px] lg:text-[14px]">
                           Danh sách phim
                         </span>
@@ -77,7 +77,7 @@ const HeaderCompoment = () => {
                                 .toLowerCase()
                                 .includes(debouncedSearchTerm),
                             )
-                              .slice(0, 5)
+                              .slice(0, 15)
                               .map((item) => (
                                 <Link
                                   to={`/phim/${item.slug}`}
@@ -85,24 +85,33 @@ const HeaderCompoment = () => {
                                   key={item._id}
                                 >
                                   <img
-                                    src={`/movies/thumbs/${item?.image}`}
+                                    src={
+                                      item.image.includes("https://")
+                                        ? item.image
+                                        : `/movies/thumbs/${item?.image}`
+                                    }
                                     alt={item?.title}
-                                    className="object-cover h-10 w-10 md:h-15 md:w-15 xl:h-20 xl:w-20 rounded-lg me-3 bleck md:block"
+                                    loading="lazy"
+                                    className="object-cover h-10 w-10 md:h-15 md:w-15 xl:h-20 xl:max-w-25 rounded-lg me-3 bleck md:block"
                                   />
-                                  <div className="flex flex-col">
+                                  <div className="flex flex-col w-full">
                                     <span className="text-[11px] md:text-[12px] lg:text-[14px]">
                                       {item.title}
                                     </span>
 
-                                    <div className="flex justify-between mt-1 md:mt-3 items-center">
+                                    <div className="flex justify-start mt-1 md:mt-3 items-center ">
                                       <span className="text-gray-400 text-xs">
                                         {item.imdb}
                                       </span>
-                                      &#8226;
+                                      <span className="mx-2 text-xl">
+                                        &#8226;
+                                      </span>
                                       <span className="text-gray-400 text-xs">
                                         {item.release_date.split("-")[2]}
                                       </span>
-                                      &#8226;
+                                      <span className="mx-2 text-xl">
+                                        &#8226;
+                                      </span>
                                       <span className="text-gray-400 text-xs">
                                         {item.duration}
                                       </span>
@@ -130,7 +139,7 @@ const HeaderCompoment = () => {
                                   .toLowerCase()
                                   .includes(debouncedSearchTerm),
                               )
-                              .slice(0, 5)
+                              .slice(0, 15)
                               .map((item) => (
                                 <Link
                                   to={`/dien-vien/${item.slug}`}
