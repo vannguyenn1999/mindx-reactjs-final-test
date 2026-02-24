@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useParams, Navigate } from "react-router-dom";
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, useState } from "react";
 
 import {
   DATA_TOPIC,
@@ -11,10 +11,13 @@ import {
 import { findNameBySlug } from "../../helpers/tools";
 import { ListDataContext } from "../../core/ListContext";
 import MovieItemCompoment from "./MovieItemCompoment";
+import { Pagination } from "flowbite-react";
 
 const MoviePage = () => {
   const { type, slug } = useParams();
+  const [page, setPage] = useState(1);
   const { DATA_MOVIE } = useContext(ListDataContext);
+
   const dataFilter = useMemo(() => {
     switch (type) {
       case "the-loai":
@@ -79,10 +82,10 @@ const MoviePage = () => {
   }
 
   return (
-    <div className="min-h-175">
+    <div className="">
       <>{renderTitle}</>
 
-      <div className="pt-7 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-2 xl:gap-3 overflow-hidden">
+      <div className="pt-7 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-7 gap-2 md:gap-2 xl:gap-3 overflow-hidden min-h-175">
         {Array.isArray(dataFilter) && dataFilter.length > 0 ? (
           dataFilter.map((item: MovieDataType) => (
             <MovieItemCompoment
@@ -102,6 +105,20 @@ const MoviePage = () => {
         ) : (
           <p className="text-white text-center mt-10">Không có phim nào</p>
         )}
+      </div>
+
+      <div className="flex justify-center items-center">
+        <Pagination
+          previousLabel="Trước"
+          nextLabel="Tiếp"
+          currentPage={page}
+          totalPages={100}
+          onPageChange={(num) => {
+            setPage(num);
+          }}
+          className="cursor-copy"
+          showIcons
+        />
       </div>
     </div>
   );

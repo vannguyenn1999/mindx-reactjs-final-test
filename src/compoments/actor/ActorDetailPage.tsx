@@ -1,30 +1,42 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // import { Link } from "react-router-dom";
 
-import { useContext, useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { ListDataContext } from "../../core/ListContext";
+import { useQuery } from "@tanstack/react-query";
+import { getData } from "../../helpers/request";
+import LoadingCompoment from "../loading/LoadingCompoment";
+import type { ActorDataType } from "../../helpers/typeData";
 
 const ActorDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { actorData } = useContext(ListDataContext);
   const navigate = useNavigate();
 
+  const { isPending: isPendingActor, data: actorData } = useQuery({
+    queryKey: ["actors"],
+    queryFn: () => getData("actors"),
+  });
+
   const actorDetail = useMemo(() => {
-    return actorData.find((actor) => actor.slug === slug);
+    return isPendingActor
+      ? {}
+      : actorData.find((actor: ActorDataType) => actor.slug === slug);
   }, [slug, actorData]);
 
   useEffect(() => {
     if (actorDetail === undefined) {
       navigate("/dien-vien/");
     }
-  }, [actorDetail, navigate]);
+  }, [actorData, slug]);
+
+  if (isPendingActor) return <LoadingCompoment />;
 
   return (
-    <div className="px-20 py-5 min-h-175">
-      <div className="grid grid-cols-4">
-        <div className="border-r border-gray-500 p-5">
-          <div>
+    <div className="px-2 min-h-175">
+      <div className="grid lg:grid-cols-3 gap-5">
+        <div className="lg:border-r border-gray-500 p-1">
+          <div className="flex justify-center items-center ">
             <img
               src={`/actors/${actorDetail?.image}`}
               alt={actorDetail?.name}
@@ -33,29 +45,31 @@ const ActorDetailPage = () => {
               loading="lazy"
             />
           </div>
-          <h3 className="py-5 font-bold text-2xl text-white">
+          <h3 className="py-5 font-bold text-2xl text-white text-center">
             {actorDetail?.name || " "}
           </h3>
 
-          <div className="mb-3">
-            <h4 className="text-white font-bold">Giới thiệu :</h4>
-            <span className="text-sm text-white">
-              {actorDetail?.info || ""}
-            </span>
-          </div>
+          <div className="px-5">
+            <div className="mb-3">
+              <h4 className="text-white font-bold">Giới thiệu :</h4>
+              <span className="text-sm text-white">
+                {actorDetail?.info || ""}
+              </span>
+            </div>
 
-          <div className="mb-3">
-            <h4 className="text-white font-bold">Giới tính :</h4>
-            <span className="text-sm text-white">
-              {actorDetail?.gender || ""}
-            </span>
-          </div>
+            <div className="mb-3">
+              <h4 className="text-white font-bold">Giới tính :</h4>
+              <span className="text-sm text-white">
+                {actorDetail?.gender || ""}
+              </span>
+            </div>
 
-          <div className="mb-3">
-            <h4 className="text-white font-bold">Quốc tịch :</h4>
-            <span className="text-sm text-white">
-              {actorDetail?.country || ""}
-            </span>
+            <div className="mb-3">
+              <h4 className="text-white font-bold">Quốc tịch :</h4>
+              <span className="text-sm text-white">
+                {actorDetail?.country || ""}
+              </span>
+            </div>
           </div>
 
           {/* <div className="mb-3">
@@ -65,7 +79,7 @@ const ActorDetailPage = () => {
             </span>
           </div> */}
         </div>
-        <div className="col-span-3 p-5">
+        <div className="lg:col-span-2 pt-5 lg:pt-0">
           <div>
             <h2 className="text-white font-bold text-xl">
               {" "}
