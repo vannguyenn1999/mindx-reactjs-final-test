@@ -51,8 +51,6 @@ export const ListProvider = ({ children }: { children: React.ReactNode }) => {
   if (isPendingMovie || isPendingActor || isPendingCategory)
     return <LoadingCompoment />;
 
-  console.log(movieData);
-
   return (
     <ListDataContext.Provider
       value={{

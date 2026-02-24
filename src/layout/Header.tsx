@@ -29,8 +29,6 @@ const HeaderCompoment = () => {
     navigate(`/tim-kiem/${searchValue}`);
   };
 
-  console.log(DATA_MOVIE);
-
   return (
     <>
       <Navbar fluid>
