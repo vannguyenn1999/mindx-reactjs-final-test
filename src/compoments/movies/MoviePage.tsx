@@ -82,7 +82,7 @@ const MoviePage = () => {
   }
 
   return (
-    <div className="">
+    <div className=" px-7 lg:px-15 py-6">
       <>{renderTitle}</>
 
       <div className="pt-7 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-7 gap-2 md:gap-2 xl:gap-3 overflow-hidden min-h-175">

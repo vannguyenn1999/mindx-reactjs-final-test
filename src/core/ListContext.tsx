@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import type {
   MovieDataType,
-  // ActorDataType,
+  ActorDataType,
   // CategoryDataType,
 } from "../helpers/typeData";
 import { getData } from "../helpers/request";
@@ -13,7 +13,7 @@ import LoadingCompoment from "../compoments/loading/LoadingCompoment";
 
 type ListContextType = {
   DATA_MOVIE: MovieDataType[];
-  // actorData: ActorDataType[] | [];
+  actorData: ActorDataType[] | [];
   // categoryData: CategoryDataType[] | [];
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
@@ -31,10 +31,10 @@ export const ListProvider = ({ children }: { children: React.ReactNode }) => {
     queryFn: () => getData("movies"),
   });
 
-  // const { isPending: isPendingCategory, data: categoryData } = useQuery({
-  //   queryKey: ["categories"],
-  //   queryFn: () => getData("categories"),
-  // });
+  const { isPending: isPendingActor, data: actorData } = useQuery({
+    queryKey: ["actors"],
+    queryFn: () => getData("actors"),
+  });
 
   const DATA_MOVIE = useMemo(
     () =>
@@ -43,13 +43,13 @@ export const ListProvider = ({ children }: { children: React.ReactNode }) => {
       ),
     [movieData, search],
   );
-  if (isPendingMovie) return <LoadingCompoment />;
+  if (isPendingMovie || isPendingActor) return <LoadingCompoment />;
 
   return (
     <ListDataContext.Provider
       value={{
         DATA_MOVIE,
-        // actorData,
+        actorData,
         // categoryData,
         search,
         setSearch,

@@ -18,7 +18,7 @@ const TopicLayout = () => {
   const divRefs = useRef<HTMLDivElement[]>([]);
   return (
     <div className="mx-2 md:mx-15 ">
-      <h2 className="text-xl text-white my-3 font-bold">
+      <h2 className="text-xl text-white mb-3 font-bold">
         Bạn đang quan tâm gì ?
       </h2>
       <div className="grid grid-cols-5 md:grid-cols-6 gap-2">

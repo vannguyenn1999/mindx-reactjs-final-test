@@ -12,7 +12,7 @@ const MasterLayout = () => {
   return (
     <div className="">
       <HeaderCompoment />
-      <main className="min-h-screen bg-[#2a374a]  mx-auto px-4 py-6">
+      <main className="min-h-screen bg-[#2a374a] mx-auto max-h-auto">
         <Outlet />
       </main>
       <div

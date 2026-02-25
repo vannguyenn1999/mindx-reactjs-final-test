@@ -10,6 +10,7 @@ export type MovieDataType = {
     actors: ActorDataType[];
     categories: string[];
     country?: string;
+    info?: string;
 }
 
 

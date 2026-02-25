@@ -32,7 +32,7 @@ const HeaderCompoment = () => {
   return (
     <>
       <Navbar fluid>
-        <div className="flex justify-between items-center w-full">
+        <div className="flex justify-between items-center w-full z-20">
           <div className="ps-5 lg:ps-8 xl:ps-10">
             <div className="flex justify-center items-center">
               <Link to={"/home"}>
