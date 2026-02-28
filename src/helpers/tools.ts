@@ -19,3 +19,9 @@ export const convertTime = (time: string, type = 1) => {
     }
     return `${year}-${month}-${day}`;
 }
+
+// ? Lấy ngẫu nhiên số phần tử từ một mảng
+export const getRandomElements = (arr: any[], count: number) => {
+    const shuffled = arr.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+}
