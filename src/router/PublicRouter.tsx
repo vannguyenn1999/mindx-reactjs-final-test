@@ -4,6 +4,7 @@ import { lazy } from "react";
 import MasterLayout from "../layout/MasterLayout";
 
 import HomePage from "../compoments/home/HomePage";
+import LoginCompoment from "../compoments/login/LoginCompoment";
 
 const ActorPage = lazy(() => import("../compoments/actor/ActorPage"));
 const MoviePage = lazy(() => import("../compoments/movies/MoviePage"));
@@ -28,6 +29,8 @@ const PublicRouter = () => {
           <Route path="/dien-vien/:slug" element={<ActorDetailPage />} />
           <Route path="*" element={<HomePage />} />
         </Route>
+
+        <Route path="/login" element={<LoginCompoment />} />
       </Routes>
     </BrowserRouter>
   );

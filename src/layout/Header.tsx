@@ -240,6 +240,7 @@ const HeaderCompoment = () => {
               color="light"
               className="cursor-pointer! ring-0 focus:ring-0"
               type="button"
+              onClick={() => navigate("/login")}
             >
               <HiOutlineUser />
               <span className="ms-1 hidden md:block md:text-[12px] lg:text-[13px] xl:text-[15px]">

@@ -32,7 +32,7 @@ const MovieDetailCompoment = () => {
   }, [slug, movie]);
 
   return (
-    <div className="relative min-h-400 lg:min-h-550">
+    <div className="relative min-h-300 lg:min-h-450">
       <img
         src={movie?.image_thumb}
         alt=""
@@ -41,7 +41,7 @@ const MovieDetailCompoment = () => {
 
       <div className="lg:px-5 xl:px-20 absolute lg:top-100 left-0 w-full">
         <div
-          className={`flex flex-col lg:grid lg:grid-cols-4 bg-[#2a374a] h-auto rounded-xl p-5`}
+          className={`flex flex-col lg:grid lg:grid-cols-4 bg-[#3f516f] h-auto rounded-xl p-5 py-10`}
         >
           <div className="lg:pe-4 lg:border-r border-gray-500">
             <img
