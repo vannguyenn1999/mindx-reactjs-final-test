@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ListDataContext } from "../../core/ListContext";
 import { Rating, RatingStar, TabItem, Tabs } from "flowbite-react";
 import {
@@ -16,6 +16,7 @@ import { HiClipboardList } from "react-icons/hi";
 const MovieDetailCompoment = () => {
   const { slug } = useParams();
   const { DATA_MOVIE } = useContext(ListDataContext);
+  const navigate = useNavigate();
 
   const movie = useMemo(() => {
     return DATA_MOVIE.find((item) => item.slug === slug);
@@ -24,12 +25,13 @@ const MovieDetailCompoment = () => {
   useEffect(() => {
     if (movie) {
       document.title = `Phim : ${movie.title}`;
+    } else {
+      navigate("/home");
     }
-
     return () => {
       document.title = "Web Movie";
     };
-  }, [slug, movie]);
+  }, [slug, movie, navigate]);
 
   return (
     <div className="relative min-h-300 lg:min-h-450">

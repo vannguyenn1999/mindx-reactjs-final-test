@@ -50,7 +50,7 @@ const MovieBackground = () => {
 
       <div className="hidden md:flex items-center absolute md:bottom-5 md:left-5 lg:bottom-20 lg:left-15 gap-5">
         <Link
-          to={`/phim/${movie.slug}`}
+          to={`/xem-phim/${movie.slug}`}
           className=" p-3 lg:p-6 rounded-full bg-amber-300 hover:bg-amber-400 transition-colors duration-300 hover:shadow-xl shadow-amber-500/50"
         >
           <FaPlay className="text-xl lg:text-2xl cursor-pointer" />

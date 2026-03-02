@@ -25,3 +25,11 @@ export const getRandomElements = (arr: any[], count: number) => {
     const shuffled = arr.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
 }
+
+// ? Lấy ID video từ URL YouTube
+export const getYouTubeID = (url: string) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+
+    return (match && match[2].length === 11) ? match[2] : null;
+}
