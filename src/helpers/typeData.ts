@@ -11,6 +11,7 @@ export type MovieDataType = {
     categories: string[];
     country?: string;
     info?: string;
+    link?: string
 }
 
 

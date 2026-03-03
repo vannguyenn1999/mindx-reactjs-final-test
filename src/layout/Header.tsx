@@ -28,11 +28,10 @@ const HeaderCompoment = () => {
     e.preventDefault();
     navigate(`/tim-kiem/${searchValue}`);
   };
-
   return (
     <>
       <Navbar fluid>
-        <div className="flex justify-between items-center w-full z-20">
+        <div className="flex justify-between items-center w-full z-40!">
           <div className="ps-5 lg:ps-8 xl:ps-10">
             <div className="flex justify-center items-center">
               <Link to={"/home"}>
@@ -66,12 +65,12 @@ const HeaderCompoment = () => {
                         </span>
                         <div className="flex flex-col justify-start items-start p-2">
                           {DATA_MOVIE.filter((it) =>
-                            it.title
+                            it?.title
                               .toLowerCase()
                               .includes(debouncedSearchTerm),
                           ).length > 0 ? (
                             DATA_MOVIE.filter((it) =>
-                              it.title
+                              it?.title
                                 .toLowerCase()
                                 .includes(debouncedSearchTerm),
                             )
@@ -175,7 +174,7 @@ const HeaderCompoment = () => {
                   Chủ đề
                 </span>
                 <FaCaretDown className="sm:text-[11px] md:text-[12px] lg:text-[14px] xl:text-[16px]" />
-                <div className="absolute top-full left-1/2 -translate-x-1/2 min-w-125 bg-gray-700 text-white rounded shadow-lg opacity-0 group-hover:opacity-90 pointer-events-none group-hover:pointer-events-auto transition-opacity z-10 ">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 min-w-125 bg-gray-700 text-white rounded shadow-lg opacity-0 group-hover:opacity-90 pointer-events-none group-hover:pointer-events-auto transition-opacity z-50! ">
                   <div className="grid grid-cols-3 p-2">
                     {DATA_TOPIC.map((item) => (
                       <Link to={`/chu-de/${item.slug}`} key={item.id}>
@@ -193,7 +192,7 @@ const HeaderCompoment = () => {
                   Thể loại
                 </span>
                 <FaCaretDown className="sm:text-[11px] md:text-[12px] lg:text-[14px] xl:text-[16px]" />
-                <div className="absolute top-full left-1/2 -translate-x-1/2 min-w-125 bg-gray-700 text-white rounded shadow-lg opacity-0 group-hover:opacity-90 pointer-events-none group-hover:pointer-events-auto transition-opacity z-10">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 min-w-125 bg-gray-700 text-white rounded shadow-lg opacity-0 group-hover:opacity-90 pointer-events-none group-hover:pointer-events-auto transition-opacity z-50!">
                   <div className="grid grid-cols-4 p-2">
                     {DATA_CATAGORY.map((item) => (
                       <Link to={`/the-loai/${item.slug}`} key={item.id}>
@@ -211,7 +210,7 @@ const HeaderCompoment = () => {
                   Quốc gia
                 </span>
                 <FaCaretDown className="sm:text-[11px] md:text-[12px] lg:text-[14px] xl:text-[16px]" />
-                <div className="absolute top-full left-1/2 -translate-x-1/2 min-w-37 bg-gray-700 text-white rounded shadow-lg opacity-0 group-hover:opacity-90 pointer-events-none group-hover:pointer-events-auto transition-opacity z-10 ">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 min-w-37 bg-gray-700 text-white rounded shadow-lg opacity-0 group-hover:opacity-90 pointer-events-none group-hover:pointer-events-auto transition-opacity z-50!">
                   <div className="grid grid-cols-1 p-2">
                     {DATA_COUNTRY.map((item) => (
                       <Link to={`/quoc-gia/${item.slug}`} key={item.id}>

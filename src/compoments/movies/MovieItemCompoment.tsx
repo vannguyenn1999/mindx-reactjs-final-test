@@ -98,7 +98,6 @@ const MovieItemCompoment: FC<MovieDataType> = ({
           </div>
         </div>
       </div>
-      ``
     </div>
   );
 };

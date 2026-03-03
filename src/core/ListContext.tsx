@@ -28,7 +28,7 @@ export const ListProvider = ({ children }: { children: React.ReactNode }) => {
 
   const { isPending: isPendingMovie, data: movieData } = useQuery({
     queryKey: ["movies"],
-    queryFn: () => getData("movies"),
+    queryFn: () => getData("movies-v2"),
   });
 
   const { isPending: isPendingActor, data: actorData } = useQuery({

@@ -1,12 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ListDataContext } from "../../core/ListContext";
-import { getData } from "../../helpers/request";
-import LoadingCompoment from "../loading/LoadingCompoment";
 import { FaFlag, FaHeart, FaShare } from "react-icons/fa";
+
 import { getYouTubeID } from "../../helpers/tools";
 import type { ActorDataType } from "../../helpers/typeData";
+import clsx from "clsx";
 
 const MovieCompoment = () => {
   const { slug } = useParams();
@@ -28,52 +27,44 @@ const MovieCompoment = () => {
     };
   }, [slug, movie, navigate]);
 
-  const { isPending, data } = useQuery({
-    queryKey: ["actors"],
-    queryFn: () => getData("videos"),
-  });
-
-  const videoId = useMemo(() => {
-    if (data) {
-      const video = data.find(
-        (item: { slug: string; link: string }) => item.slug === slug,
-      );
-      return video ? video.link : "";
-    }
-  }, [data, slug]);
-
-  if (isPending && videoId == "") return <LoadingCompoment />;
-
   return (
     <>
-      <div className="bg-[#1f2029] mx-auto min-h-280 relative px-15 py-10">
-        {cinemaMode && <div className="fixed inset-0 bg-black z-30" />}
+      <div className="bg-[#1f2029] mx-auto min-h-280 relative lg:px-15 lg:py-10">
+        {cinemaMode && <div className="fixed inset-0 bg-black z-45" />}
 
-        <div className={`mb-25 rounded-xl relative shadow-lg z-50! h-180`}>
+        <div
+          className={clsx(
+            "mb-25 rounded-xl relative shadow-lg h-70 md:h-150 lg:h-180",
+            {
+              "z-31!": cinemaMode === false,
+              "z-50!": cinemaMode === true,
+            },
+          )}
+        >
           <iframe
-            className="rounded-t-xl w-full h-full"
-            src={`https://www.youtube.com/embed/${videoId ? getYouTubeID(videoId) : ""}`}
+            className="md:rounded-t-xl w-full h-full"
+            src={`https://www.youtube-nocookie.com/embed/${movie ? getYouTubeID(String(movie?.link)) : ""}`}
             title={movie?.title}
             loading="lazy"
             allow="autoplay"
           ></iframe>
           <div className="min-h-12.5 bg-[#08080a]">
             <div className="flex justify-between items-center px-5 py-3 rounded-b-xl">
-              <div className="flex items-center px-5">
+              <div className="flex items-center lg:px-5">
                 <div className="flex items-center text-white cursor-pointer py-2 px-3 rounded-lg hover:bg-gray-800">
                   <FaHeart />
-                  <span className="ms-2">Yêu thích</span>
+                  <span className="hidden md:block ms-2">Yêu thích</span>
                 </div>
                 <div className="flex items-center text-white cursor-pointer py-2 px-3 rounded-lg hover:bg-gray-800">
                   <FaShare />
-                  <span className="ms-2">Chia sẻ</span>
+                  <span className="hidden md:block ms-2">Chia sẻ</span>
                 </div>
                 <div
                   onClick={() => setCinemaMode(!cinemaMode)}
                   className="flex items-center text-white cursor-pointer py-2 px-3 rounded-lg hover:bg-gray-800"
                 >
                   <div className="ms-2 flex items-center ">
-                    Rạp phim
+                    <span className="hidden md:block">Rạp phim</span>
                     <span className="text-[10px] text-amber-500 ms-2 border border-amber-500 p-0.5 rounded-xl px-2">
                       {cinemaMode ? "ON" : "OFF"}
                     </span>
@@ -82,16 +73,16 @@ const MovieCompoment = () => {
               </div>
               <div className="flex items-center cursor-pointer">
                 <FaFlag className="text-white" />
-                <span className="text-white ms-2">Báo lỗi</span>
+                <span className="hidden md:block text-white ms-2">Báo lỗi</span>
               </div>
             </div>
           </div>
           {/* Nút đóng khi ở cinema mode */}
         </div>
 
-        <div className="grid grid-cols-3 gap-5">
-          <div className="col-span-2">
-            <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-5">
+          <div className="col-span-2 px-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="">
                 <div className="flex p-3 bg-gray-700 w-auto rounded-xl me-5">
                   <img
@@ -130,14 +121,10 @@ const MovieCompoment = () => {
           </div>
 
           <div>
-            <h2 className="text-white font-bold text-xl">Diễn viên</h2>
-            <div className="px-5 grid grid-cols-3 gap-4 py-5">
+            <h2 className="text-white font-bold text-xl px-3">Diễn viên</h2>
+            <div className="px-5 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-4 gap-4 py-5">
               {movie?.actors.map((item: ActorDataType) => (
-                <Link
-                  to={`/dien-vien/${item.slug}`}
-                  key={item._id}
-                  className="pointer-events-none"
-                >
+                <Link to={`/dien-vien/${item.slug}`} key={item._id}>
                   <div className="flex justify-center items-centers">
                     <img
                       className="w-20 h-20 rounded-full object-cover "

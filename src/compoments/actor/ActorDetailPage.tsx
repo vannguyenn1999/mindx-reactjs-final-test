@@ -1,18 +1,27 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // import { Link } from "react-router-dom";
 
-import { useEffect, useMemo } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useMemo } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
 import { getData } from "../../helpers/request";
 import LoadingCompoment from "../loading/LoadingCompoment";
 import type { ActorDataType } from "../../helpers/typeData";
+import { ListDataContext } from "../../core/ListContext";
 
 const ActorDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
+  const { DATA_MOVIE } = useContext(ListDataContext);
 
+  const movieSuggestion = useMemo(() => {
+    return DATA_MOVIE.filter((movie) => {
+      return movie.actors.some((ac) => ac.slug === `${String(slug)}`);
+    });
+  }, [slug, DATA_MOVIE]);
+
+  // console.log(movieSuggestion);
   const { isPending: isPendingActor, data: actorData } = useQuery({
     queryKey: ["actors"],
     queryFn: () => getData("actors"),
@@ -33,7 +42,7 @@ const ActorDetailPage = () => {
   if (isPendingActor) return <LoadingCompoment />;
 
   return (
-    <div className="px-2 min-h-175">
+    <div className="px-2 min-h-175 py-10">
       <div className="grid lg:grid-cols-3 gap-5">
         <div className="lg:border-r border-gray-500 p-1">
           <div className="flex justify-center items-center ">
@@ -71,13 +80,6 @@ const ActorDetailPage = () => {
               </span>
             </div>
           </div>
-
-          {/* <div className="mb-3">
-            <h4 className="text-white font-bold">Ngày sinh :</h4>
-            <span className="text-sm text-white">
-              {convertTime(data?.results[0]?.birthday)}
-            </span>
-          </div> */}
         </div>
         <div className="lg:col-span-2 pt-5 lg:pt-0">
           <div>
@@ -87,15 +89,19 @@ const ActorDetailPage = () => {
             </h2>
           </div>
 
-          {/* <div className="grid grid-cols-5 gap-4 pt-5">
-            {Array.isArray(dataSuggestion) &&
-              dataSuggestion.map((item: MovieItem) => {
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 lg:gap-4 pt-5">
+            {movieSuggestion.length > 0 &&
+              movieSuggestion.slice(0, 6).map((item) => {
                 return (
-                  <Link to={`/xem-phim/${item.slug}`} key={item.id}>
+                  <Link
+                    to={`/phim/${item.slug}`}
+                    key={item._id}
+                    className="hover:scale-105 transition-transform duration-200"
+                  >
                     <img
-                      src={item.image_avatar ? String(item.image_avatar) : ""}
+                      src={item.image ? String(item.image) : ""}
                       alt={item.title}
-                      className="rounded-2xl object-cover"
+                      className="block rounded-2xl object-cover w-62 h-50 xl:h-76 bg-gray-600"
                       loading="lazy"
                     />
                     <span className="flex justify-center text-white text-sm pt-2">
@@ -104,7 +110,7 @@ const ActorDetailPage = () => {
                   </Link>
                 );
               })}
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@ const MoviePage = () => {
 
       case "quoc-gia":
         return DATA_MOVIE?.filter(
-          (item: MovieDataType) => item.country === `${String(slug)}:`,
+          (item: MovieDataType) => item.country === `${String(slug)}`,
         );
       default:
         return DATA_MOVIE;
@@ -85,7 +85,7 @@ const MoviePage = () => {
     <div className=" px-7 lg:px-15 py-6">
       <>{renderTitle}</>
 
-      <div className="pt-7 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-7 gap-2 md:gap-2 xl:gap-3 overflow-hidden min-h-175">
+      <div className="pt-7 pb-10 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-7 gap-2 md:gap-2 xl:gap-3 overflow-hidden min-h-175">
         {Array.isArray(dataFilter) && dataFilter.length > 0 ? (
           dataFilter.map((item: MovieDataType) => (
             <MovieItemCompoment
