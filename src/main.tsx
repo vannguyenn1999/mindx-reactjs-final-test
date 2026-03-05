@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "./index.css";
+
 import PublicRouter from "./router/PublicRouter.tsx";
 import { ListProvider } from "./core/ListContext.tsx";
 

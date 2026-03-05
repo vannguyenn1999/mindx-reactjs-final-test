@@ -23,7 +23,8 @@ export const convertTime = (time: string, type = 1) => {
 // ? Lấy ngẫu nhiên số phần tử từ một mảng
 export const getRandomElements = (arr: any[], count: number) => {
     const shuffled = arr.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
+    // return shuffled.slice(0, count);
+    return [...new Set(shuffled.slice(0, count))];
 }
 
 // ? Lấy ID video từ URL YouTube
