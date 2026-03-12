@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 
 const MovieBackground = () => {
   const { DATA_MOVIE } = useContext(ListDataContext);
-
   const randomMovie = useMemo(
     () => getRandomElements(DATA_MOVIE, 5),
     [DATA_MOVIE],

@@ -83,7 +83,7 @@ const HeaderCompoment = () => {
                                 >
                                   <img
                                     src={
-                                      item.image.includes("https://")
+                                      item.image.includes("https://") || item.image.includes("data:image/jpeg;base64")
                                         ? item.image
                                         : `/movies/thumbs/${item?.image}`
                                     }
