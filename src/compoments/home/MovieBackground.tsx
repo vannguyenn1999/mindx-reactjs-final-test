@@ -21,6 +21,7 @@ const MovieBackground = () => {
         src={movie.image_thumb}
         alt=""
         className="w-full h-70 lg:h-full! object-center mask-l-from-5% mask-l-to-95% transform-transition duration-100"
+        loading="lazy"
       />
 
       <div className="absolute bottom-15 left-5 md:bottom-25 lg:top-55 lg:left-15 w-70 lg:w-100 flex flex-col gap-1 lg:gap-4 flex-wrap transform-transition duration-100">
