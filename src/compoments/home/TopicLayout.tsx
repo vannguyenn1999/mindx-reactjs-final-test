@@ -17,7 +17,7 @@ const bgColors = [
 const TopicLayout = () => {
   const divRefs = useRef<HTMLDivElement[]>([]);
   return (
-    <div className="mx-2 md:mx-5 lg:mx-15">
+    <div className="mx-2 md:mx-5 lg:mx-15 mt-5">
       <h2 className="text-xl text-white mb-3 font-bold">
         Bạn đang quan tâm gì ?
       </h2>

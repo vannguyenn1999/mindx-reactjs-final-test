@@ -19,8 +19,8 @@ const MovieBackground = () => {
     <div className={`relative w-full max-h-125 lg:max-h-160 overflow-hidden`}>
       <img
         src={movie.image_thumb}
-        alt=""
-        className="w-full h-70 lg:h-full! object-center mask-l-from-5% mask-l-to-95% transform-transition duration-100"
+        alt={movie.title}
+        className="w-full h-100 lg:h-full! object-cover mask-l-from-5% mask-l-to-95% transform-transition duration-100"
         loading="lazy"
       />
 

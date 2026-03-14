@@ -10,7 +10,7 @@ const MasterLayout = () => {
   };
 
   return (
-    <div className="">
+    <>
       <HeaderCompoment />
       <main className="min-h-screen bg-[#2a374a] mx-auto max-h-auto">
         <Outlet />
@@ -22,7 +22,7 @@ const MasterLayout = () => {
         <FaArrowCircleUp />
       </div>
       <FooterCompoment />
-    </div>
+    </>
   );
 };
 export default MasterLayout;
