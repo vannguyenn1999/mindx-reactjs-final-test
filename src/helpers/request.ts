@@ -1,5 +1,8 @@
 import axios from "axios";
 
+import {setupInterceptorsTo} from "../core/Interceptors";
+
+setupInterceptorsTo(axios);
 
 
 export const getData = (name: string) => {

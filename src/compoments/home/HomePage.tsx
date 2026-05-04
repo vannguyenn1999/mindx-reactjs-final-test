@@ -1,18 +1,17 @@
-import { useContext, useMemo } from "react";
-import MovieScroll from "./MovieScroll";
-import TopicLayout from "./TopicLayout";
+import { useContext, useMemo } from 'react';
+import MovieScroll from './MovieScroll';
+import TopicLayout from './TopicLayout';
 
-import MovieBackground from "./MovieBackground";
-import { ListDataContext } from "../../core/ListContext";
-import { getRandomElements } from "../../helpers/tools";
-import ManualSlider from "./ManualSlider";
+import MovieBackground from './MovieBackground';
+import { ListDataContext } from '../../core/ListContext';
+import { getRandomElements } from '../../helpers/tools';
+import ManualSlider from './ManualSlider';
 
 const HomePage = () => {
   const { DATA_MOVIE } = useContext(ListDataContext);
-
   const movieScroll = useMemo(
     () => getRandomElements(DATA_MOVIE, 10),
-    [DATA_MOVIE],
+    [DATA_MOVIE]
   );
 
   const movieTypeActic = useMemo(() => {
