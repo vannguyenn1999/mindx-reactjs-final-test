@@ -7,8 +7,14 @@ import {
   Dropdown,
   DropdownItem,
 } from 'flowbite-react';
-import { HiOutlineSearch, HiOutlineUser, HiMenu } from 'react-icons/hi';
-import { FaCaretDown } from 'react-icons/fa';
+import { HiOutlineSearch, HiOutlineUser } from 'react-icons/hi';
+import {
+  FaCaretDown,
+  FaHeart,
+  FaSignOutAlt,
+  FaTh,
+  FaUser,
+} from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { DATA_CATAGORY, DATA_COUNTRY, DATA_TOPIC } from '../helpers/typeData';
@@ -22,7 +28,6 @@ const HeaderCompoment = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { auth, logout } = useAuth();
   const [searchValue, setSearchValue] = useState('');
-  // console.log("auth" , auth)
   const debouncedSearchTerm = useDebounce(searchValue, 500);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -261,16 +266,31 @@ const HeaderCompoment = () => {
                 )}
               >
                 <DropdownItem>
-                  <Link to={`/the-loai/phim-moi`}>Chủ đề</Link>
+                  <div className="flex items-center">
+                    <FaUser />
+                    <span className="ms-1">Hồ Sơ</span>
+                  </div>
                 </DropdownItem>
                 <DropdownItem>
-                  <Link to={`/the-loai/hanh-dong`}>Thể Loại</Link>
+                  <div className="flex items-center">
+                    <FaHeart />
+                    <span className="ms-1">Phim Ưu Thích</span>
+                  </div>
                 </DropdownItem>
-                <DropdownItem>
-                  <Link to={`/quoc-gia/viet-nam`}>Quốc gia</Link>
-                </DropdownItem>
+                {auth?.user?.role === 'admin' && (
+                  <DropdownItem>
+                    <div className="flex items-center">
+                      <FaTh />
+                      <span className="ms-1">Quản Lý</span>
+                    </div>
+                  </DropdownItem>
+                )}
+
                 <DropdownItem onClick={handleLogout}>
-                  <span>Đăng Xuất</span>
+                  <div className="flex items-center">
+                    <FaSignOutAlt />
+                    <span className="ms-1">Đăng Xuất</span>
+                  </div>
                 </DropdownItem>
               </Dropdown>
             ) : (

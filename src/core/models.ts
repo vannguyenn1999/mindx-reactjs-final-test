@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { FormikProps } from "formik";
-import type { JSX } from "react";
+import type { FormikProps } from 'formik';
+import type { JSX } from 'react';
 
 export interface AuthModel {
   access: string;
@@ -11,7 +11,8 @@ export interface AuthModel {
     username: string;
     image: string;
     is_staff?: boolean;
-    name ?: string;
+    name?: string;
+    role?: string;
   };
 }
 
@@ -46,15 +47,18 @@ export type QueryRequestContextProps = {
 };
 
 export const initialQueryRequest: QueryRequestContextProps = {
-  state: "",
-  updateState: () => { },
+  state: '',
+  updateState: () => {},
 };
-
 
 export type OptionType = { label: string; value: string; labelText: string };
 
-export type OptionType2 = { label: string; value: JSX.Element; labelText: string }
+export type OptionType2 = {
+  label: string;
+  value: JSX.Element;
+  labelText: string;
+};
 
 export type MovieOtherDataProps = {
   formik: FormikProps<any>;
-}; 
+};

@@ -40,7 +40,7 @@ const LoginCompoment = () => {
         console.log('response :', response);
         saveAuth(response.data);
         if (response.status === 200) {
-          toast.success('Đăng nhập thành công!');
+          toast.success(`Xin chào ${response.data.user.name} !`);
           navigation('/home');
         } else {
           toast.error('Đăng nhập thất bại!');
